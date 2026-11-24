@@ -1,0 +1,9 @@
+import { NextRequest } from "next/server";
+import { permitController } from "@/backend/controllers/permitController";
+
+export async function POST(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  return permitController.transitionPermit(req, params.id);
+}
