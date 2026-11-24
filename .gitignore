@@ -30,3 +30,6 @@ prisma/*.db-journal
 # OS files
 .DS_Store
 Thumbs.db
+
+# TypeScript build cache
+*.tsbuildinfo
