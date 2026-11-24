@@ -26,7 +26,7 @@ export class PermitController {
       const type = searchParams.get("type");
       const areaId = searchParams.get("areaId");
       const expiringSoon = searchParams.get("expiringSoon") === "true";
-      const myApprovalsPending = searchParams.get("myApprovalsPending") === "true";
+      const myApprovalsPending = searchParams.get("myApprovalsPending") === "true" || searchParams.get("myApprovalsOnly") === "true";
 
       const currentUser = await getCurrentUser(req);
       const now = new Date();
