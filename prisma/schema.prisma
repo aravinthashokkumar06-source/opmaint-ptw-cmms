@@ -1,0 +1,209 @@
+// ==============================================================================
+// OPMAINT CMMS - PERMIT TO WORK (PTW) ENTERPRISE DATA ARCHITECTURE
+// Schema Design Pattern: Shared Permit Core + Typed Polymorphic Attributes
+// ==============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ------------------------------------------------------------------------------
+// 1. IDENTITY & RBAC ENTITIES
+// Roles: REQUESTER, AREA_OWNER, SAFETY_OFFICER, ADMIN
+// ------------------------------------------------------------------------------
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         String    // REQUESTER | AREA_OWNER | SAFETY_OFFICER | ADMIN
+  department   String?
+
+  // Plant Area ownership (Area Owner persona)
+  areasOwned   Area[]    @relation("AreaOwner")
+
+  // Relationships
+  permitsRequested  Permit[]         @relation("PermitRequester")
+  approvalsGiven    Approval[]
+  auditLogsRecorded PermitAuditLog[]
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([role])
+}
+
+// ------------------------------------------------------------------------------
+// 2. INDUSTRIAL ASSET HIERARCHY (Plant -> Area -> Equipment)
+// Standard enterprise CMMS plant topology modeling
+// ------------------------------------------------------------------------------
+model Plant {
+  id        String   @id @default(uuid())
+  name      String   // e.g. "Chennai Automotive Assembly Plant"
+  code      String   @unique // e.g. "PLANT-CHE-01"
+  location  String   // Physical site address
+
+  areas     Area[]
+  permits   Permit[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Area {
+  id        String      @id @default(uuid())
+  name      String      // e.g. "High Pressure Boiler Room"
+  plantId   String
+  plant     Plant       @relation(fields: [plantId], references: [id], onDelete: Cascade)
+
+  // Designated Area Owner responsible for local permits
+  ownerId   String?
+  owner     User?       @relation("AreaOwner", fields: [ownerId], references: [id])
+
+  equipment Equipment[]
+  permits   Permit[]
+
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@index([plantId])
+  @@index([ownerId])
+}
+
+model Equipment {
+  id        String   @id @default(uuid())
+  tag       String   @unique // Unique Asset Tag: "EQ-BLR-01"
+  name      String   // "High-Pressure Steam Boiler Unit 1"
+  areaId    String
+  area      Area     @relation(fields: [areaId], references: [id], onDelete: Cascade)
+  status    String   @default("OPERATIONAL") // OPERATIONAL | MAINTENANCE | ISOLATED
+
+  permits   Permit[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([areaId])
+}
+
+// ------------------------------------------------------------------------------
+// 3. CORE PERMIT TO WORK ENTITY
+// Extensible Model: Shared Core Attributes + Polymorphic JSON Payload
+// ------------------------------------------------------------------------------
+model Permit {
+  id                  String   @id @default(uuid())
+  permitNumber        String   @unique // Format: PTW-YYYY-XXXX
+
+  // Type: HOT_WORK | CONFINED_SPACE | WORKING_AT_HEIGHT | ELECTRICAL_LOTO | EXCAVATION
+  type                String
+
+  // State Machine Status:
+  // DRAFT | PENDING_APPROVAL | APPROVED | ACTIVE | SUSPENDED | CLOSED | CLOSED_VERIFIED | REJECTED | EXPIRED | CANCELLED
+  status              String   @default("DRAFT")
+
+  // Shared Core: Requester & Execution Team
+  requesterId         String
+  requester           User     @relation("PermitRequester", fields: [requesterId], references: [id])
+  contractorName      String   // Contractor or In-House Maintenance crew
+  workDescription     String   // High stakes task description
+
+  // Shared Core: Physical Location Hierarchy
+  plantId             String
+  plant               Plant    @relation(fields: [plantId], references: [id])
+  areaId              String
+  area                Area     @relation(fields: [areaId], references: [id])
+  equipmentId         String
+  equipment           Equipment @relation(fields: [equipmentId], references: [id])
+
+  // Shared Core: Validity Window
+  plannedStartTime    DateTime
+  plannedEndTime      DateTime
+  actualStartTime     DateTime?
+  actualEndTime       DateTime?
+
+  // Shared Core: Safety Assessment & Precautions Checklists (Serialized JSON arrays)
+  hazardsIdentified   String   // ["Flammable Vapour", "Open Flame", ...]
+  ppeRequired         String   // ["Face Shield", "Flame Retardant Suit", ...]
+  precautionsChecklist String  // [{ item: "Fire watch stationed", checked: true }, ...]
+
+  // Extensible Polymorphic Technical Data (JSON payload)
+  // Supports Hot Work (Gas test, radius), Confined Space (4-Gas readings), Height, LOTO, Excavation
+  typeSpecificData    String
+
+  // Associated Approvals & Audit Trail
+  approvals           Approval[]
+  auditLogs           PermitAuditLog[]
+
+  // Extension Flow Details (+N hours)
+  extensionRequestedHours Int?
+  extensionReason         String?
+  extensionApproved       Boolean?
+
+  // State Transition Annotations & Reasons
+  rejectionReason     String?
+  suspensionReason    String?
+  closureNotes        String?
+  verificationNotes   String?
+
+  // Optional captured visual signature data
+  signatureData       String?
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  // Performance Indexes for high-concurrency CMMS queries
+  @@index([status])
+  @@index([areaId, plannedStartTime, plannedEndTime])
+  @@index([plantId])
+  @@index([requesterId])
+}
+
+// ------------------------------------------------------------------------------
+// 4. MULTI-LEVEL APPROVAL ENTITY
+// Governs Area Owner and Safety Officer sign-offs
+// ------------------------------------------------------------------------------
+model Approval {
+  id            String    @id @default(uuid())
+  permitId      String
+  permit        Permit    @relation(fields: [permitId], references: [id], onDelete: Cascade)
+  approverId    String
+  approver      User      @relation(fields: [approverId], references: [id])
+  roleRequired  String    // AREA_OWNER | SAFETY_OFFICER
+
+  status        String    @default("PENDING") // PENDING | APPROVED | REJECTED
+  comments      String?
+  signatureData String?   // Canvas-drawn base64 raster signature
+  signedAt      DateTime?
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([permitId, roleRequired])
+  @@index([approverId])
+}
+
+// ------------------------------------------------------------------------------
+// 5. IMMUTABLE SAFETY AUDIT TRAIL
+// Legally required in real-world plants for incident & statutory safety audits
+// ------------------------------------------------------------------------------
+model PermitAuditLog {
+  id             String    @id @default(uuid())
+  permitId       String
+  permit         Permit    @relation(fields: [permitId], references: [id], onDelete: Cascade)
+  action         String    // CREATED | SUBMITTED | APPROVED | ACTIVATED | SUSPENDED | RESUMED | CLOSED | VERIFIED | REJECTED | EXTENDED
+  performedById  String
+  performedBy    User      @relation(fields: [performedById], references: [id])
+  fromStatus     String?
+  toStatus       String?
+  comment        String?
+  diff           String?   // JSON representation of field-level deltas
+  timestamp      DateTime  @default(now())
+
+  @@index([permitId])
+  @@index([timestamp])
+}
