@@ -89,43 +89,37 @@ export const MetricCards: React.FC<MetricCardsProps> = ({
             onClick={() => onFilterClick(c.id)}
             role="button"
             tabIndex={0}
-            className={`relative cursor-pointer p-4 sm:p-5 rounded-2xl border-2 transition-all duration-200 select-none ${
+            className={`relative cursor-pointer p-3.5 sm:p-4 rounded-xl border-2 transition-all duration-200 select-none ${
               isSelected ? c.activeStyles : c.inactiveStyles
             }`}
           >
             {/* Top row: Title & Icon */}
-            <div className="flex items-center justify-between mb-2.5">
-              <span className={`text-xs font-bold uppercase tracking-wider ${
+            <div className="flex items-center justify-between mb-2">
+              <span className={`text-[11px] font-bold uppercase tracking-wider ${
                 isSelected ? 'text-slate-900' : 'text-slate-500'
               }`}>
                 {c.title}
               </span>
-              <div className={`p-2 rounded-xl ${c.iconBg} ${c.iconColor} shadow-xs`}>
-                <Icon className={`w-4 h-4 ${c.isPulse ? 'animate-pulse' : ''}`} />
+              <div className={`p-1.5 rounded-lg ${c.iconBg} ${c.iconColor} shadow-2xs`}>
+                <Icon className={`w-3.5 h-3.5 ${c.isPulse ? 'animate-pulse' : ''}`} />
               </div>
             </div>
 
             {/* Middle row: Big number & Subtitle */}
             <div className="flex items-baseline justify-between">
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+                <span className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
                   {c.count}
                 </span>
-                <span className="text-xs text-slate-500 font-medium hidden sm:inline">
+                <span className="text-[11px] text-slate-400 font-medium hidden sm:inline">
                   {c.subtitle}
                 </span>
               </div>
 
               {/* Status Badge */}
               <div className="flex items-center gap-1.5">
-                {isSelected && (
-                  <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-slate-800 bg-white/90 px-1.5 py-0.5 rounded shadow-2xs border border-slate-300">
-                    <Check className="w-3 h-3 text-slate-900 stroke-[3]" />
-                    ACTIVE
-                  </span>
-                )}
                 {c.badge && (
-                  <span className={`text-[10px] uppercase px-2 py-0.5 rounded-md shadow-2xs ${c.badgeColor}`}>
+                  <span className={`text-[9px] font-bold uppercase px-1.5 py-0.2 rounded shadow-2xs ${c.badgeColor}`}>
                     {c.badge}
                   </span>
                 )}

@@ -13,9 +13,6 @@ import {
   ShieldAlert, 
   ChevronRight,
   Copy,
-  CheckCircle2,
-  Clock,
-  XCircle,
   Check
 } from 'lucide-react';
 
@@ -63,113 +60,49 @@ export const PermitTable: React.FC<PermitTableProps> = ({ permits, loading }) =>
   const getTypeBadge = (type: string) => {
     switch (type) {
       case 'HOT_WORK':
-        return { 
-          label: 'Hot Work', 
-          icon: Flame, 
-          style: 'bg-orange-50 text-orange-700 border-orange-200/90' 
-        };
+        return { label: 'Hot Work', icon: Flame, style: 'bg-orange-50 text-orange-700 border-orange-200/90' };
       case 'CONFINED_SPACE':
-        return { 
-          label: 'Confined Space', 
-          icon: Box, 
-          style: 'bg-purple-50 text-purple-700 border-purple-200/90' 
-        };
+        return { label: 'Confined Space', icon: Box, style: 'bg-purple-50 text-purple-700 border-purple-200/90' };
       case 'WORKING_AT_HEIGHT':
-        return { 
-          label: 'Height Work', 
-          icon: ArrowUpRight, 
-          style: 'bg-sky-50 text-sky-700 border-sky-200/90' 
-        };
+        return { label: 'Height Work', icon: ArrowUpRight, style: 'bg-sky-50 text-sky-700 border-sky-200/90' };
       case 'ELECTRICAL_LOTO':
-        return { 
-          label: 'Electrical LOTO', 
-          icon: Zap, 
-          style: 'bg-amber-50 text-amber-700 border-amber-200/90' 
-        };
+        return { label: 'Electrical LOTO', icon: Zap, style: 'bg-amber-50 text-amber-700 border-amber-200/90' };
       case 'CHEMICAL_HANDLING':
-        return { 
-          label: 'Chemical Handling', 
-          icon: FlaskConical, 
-          style: 'bg-emerald-50 text-emerald-700 border-emerald-200/90' 
-        };
+        return { label: 'Chemical Handling', icon: FlaskConical, style: 'bg-emerald-50 text-emerald-700 border-emerald-200/90' };
       case 'COLD_WORK':
-        return { 
-          label: 'Cold Work', 
-          icon: Snowflake, 
-          style: 'bg-cyan-50 text-cyan-700 border-cyan-200/90' 
-        };
+        return { label: 'Cold Work', icon: Snowflake, style: 'bg-cyan-50 text-cyan-700 border-cyan-200/90' };
       default:
-        return { 
-          label: type, 
-          icon: ShieldAlert, 
-          style: 'bg-slate-50 text-slate-700 border-slate-200' 
-        };
+        return { label: type, icon: ShieldAlert, style: 'bg-slate-50 text-slate-700 border-slate-200' };
     }
   };
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'ACTIVE':
-        return { 
-          label: 'Active (On Site)', 
-          style: 'bg-emerald-50 text-emerald-800 border-emerald-300 font-bold', 
-          dot: 'bg-emerald-500 animate-ping' 
-        };
+        return { label: 'Active', style: 'bg-emerald-50 text-emerald-800 border-emerald-300 font-bold', dot: 'bg-emerald-500 animate-ping' };
       case 'PENDING_APPROVAL':
-        return { 
-          label: 'Pending Approval', 
-          style: 'bg-amber-50 text-amber-900 border-amber-300 font-bold', 
-          dot: 'bg-amber-500 animate-pulse' 
-        };
+        return { label: 'Pending', style: 'bg-amber-50 text-amber-900 border-amber-300 font-bold', dot: 'bg-amber-500 animate-pulse' };
       case 'APPROVED':
-        return { 
-          label: 'Approved', 
-          style: 'bg-blue-50 text-blue-800 border-blue-300 font-semibold', 
-          dot: 'bg-blue-500' 
-        };
+        return { label: 'Approved', style: 'bg-blue-50 text-blue-800 border-blue-300 font-semibold', dot: 'bg-blue-500' };
       case 'SUSPENDED':
-        return { 
-          label: 'Suspended', 
-          style: 'bg-red-100 text-red-900 border-red-300 font-bold', 
-          dot: 'bg-red-600 animate-bounce' 
-        };
+        return { label: 'Suspended', style: 'bg-red-100 text-red-900 border-red-300 font-bold', dot: 'bg-red-600 animate-bounce' };
       case 'CLOSED':
       case 'CLOSED_VERIFIED':
-        return { 
-          label: 'Closed', 
-          style: 'bg-slate-100 text-slate-700 border-slate-300 font-medium', 
-          dot: 'bg-slate-400' 
-        };
+        return { label: 'Closed', style: 'bg-slate-100 text-slate-700 border-slate-300 font-medium', dot: 'bg-slate-400' };
       case 'EXPIRED':
-        return { 
-          label: 'Expired', 
-          style: 'bg-red-50 text-red-700 border-red-200 font-semibold', 
-          dot: 'bg-red-600' 
-        };
+        return { label: 'Expired', style: 'bg-red-50 text-red-700 border-red-200 font-semibold', dot: 'bg-red-600' };
       case 'REJECTED':
-        return { 
-          label: 'Rejected', 
-          style: 'bg-red-50 text-red-700 border-red-200 font-semibold', 
-          dot: 'bg-red-600' 
-        };
+        return { label: 'Rejected', style: 'bg-red-50 text-red-700 border-red-200 font-semibold', dot: 'bg-red-600' };
       case 'DRAFT':
-        return { 
-          label: 'Draft', 
-          style: 'bg-slate-50 text-slate-600 border-slate-200', 
-          dot: 'bg-slate-400' 
-        };
+        return { label: 'Draft', style: 'bg-slate-50 text-slate-600 border-slate-200', dot: 'bg-slate-400' };
       default:
-        return { 
-          label: status, 
-          style: 'bg-slate-50 text-slate-700 border-slate-300', 
-          dot: 'bg-slate-400' 
-        };
+        return { label: status, style: 'bg-slate-50 text-slate-700 border-slate-300', dot: 'bg-slate-400' };
     }
   };
 
   if (loading) {
     return (
-      <div className="bg-white rounded-2xl border border-slate-200/90 p-16 text-center shadow-sm">
+      <div className="bg-white rounded-2xl border border-slate-200/90 p-16 text-center shadow-2xs">
         <div className="inline-block w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-3" />
         <p className="text-sm font-semibold text-slate-700">Loading industrial safety permits...</p>
         <p className="text-xs text-slate-400 mt-0.5">Syncing with plant safety register</p>
@@ -179,7 +112,7 @@ export const PermitTable: React.FC<PermitTableProps> = ({ permits, loading }) =>
 
   if (permits.length === 0) {
     return (
-      <div className="bg-white rounded-2xl border border-slate-200/90 p-16 text-center shadow-sm">
+      <div className="bg-white rounded-2xl border border-slate-200/90 p-16 text-center shadow-2xs">
         <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto mb-4 border border-amber-200/60">
           <ShieldAlert className="w-7 h-7" />
         </div>
@@ -198,28 +131,20 @@ export const PermitTable: React.FC<PermitTableProps> = ({ permits, loading }) =>
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse table-fixed">
-          {/* Defined column widths for rock-solid structural alignment */}
-          <colgroup>
-            <col className="w-[32%]" />
-            <col className="w-[14%]" />
-            <col className="w-[18%]" />
-            <col className="w-[12%]" />
-            <col className="w-[12%]" />
-            <col className="w-[6%]" />
-            <col className="w-[6%]" />
-          </colgroup>
+    <div className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden w-full">
+      <div className="w-full overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[840px]">
           <thead>
             <tr className="bg-slate-50/90 border-b border-slate-200/80 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">
-              <th className="py-3.5 px-5">Permit Details</th>
-              <th className="py-3.5 px-3">Safety Type</th>
-              <th className="py-3.5 px-3">Plant & Area</th>
-              <th className="py-3.5 px-3">Status</th>
-              <th className="py-3.5 px-3">Validity</th>
-              <th className="py-3.5 px-3 text-center">Approvals</th>
-              <th className="py-3.5 px-5 text-right">Action</th>
+              <th className="py-3 px-4 min-w-[220px] sticky left-0 bg-slate-50/95 z-20 shadow-[6px_0_10px_-4px_rgba(0,0,0,0.06)]">Permit Details</th>
+              <th className="py-3 px-3 w-[140px] whitespace-nowrap">Safety Type</th>
+              <th className="py-3 px-3 w-[180px]">Plant & Area</th>
+              <th className="py-3 px-3 w-[110px] whitespace-nowrap">Status</th>
+              <th className="py-3 px-3 w-[130px] whitespace-nowrap">Validity</th>
+              <th className="py-3 px-2 w-[70px] text-center whitespace-nowrap">Approvals</th>
+              <th className="py-3 pr-4 pl-3 w-[105px] text-right whitespace-nowrap sticky right-0 bg-slate-50/95 shadow-[-8px_0_12px_-4px_rgba(0,0,0,0.06)] z-20">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-xs">
@@ -240,37 +165,37 @@ export const PermitTable: React.FC<PermitTableProps> = ({ permits, loading }) =>
                   className="hover:bg-slate-50/70 transition-colors group cursor-pointer"
                   onClick={() => window.location.href = `/permits/${permit.id}`}
                 >
-                  {/* Column 1: Permit Details */}
-                  <td className="py-4 px-5 align-top">
+                  {/* Column 1: Permit Details (Sticky Left) */}
+                  <td className="py-3.5 px-4 align-top sticky left-0 bg-white group-hover:bg-slate-50 transition-colors z-10 shadow-[6px_0_10px_-4px_rgba(0,0,0,0.06)]">
                     <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono font-bold text-xs px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 border border-slate-200/80 group-hover:border-amber-400 transition-colors">
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-mono font-bold text-xs px-1.5 py-0.2 rounded bg-slate-100 text-slate-800 border border-slate-200/80 group-hover:border-amber-400 transition-colors">
                           {permit.permitNumber}
                         </span>
                         <button
                           onClick={(e) => copyToClipboard(permit.permitNumber, e)}
                           title="Copy Permit Number"
-                          className="text-slate-400 hover:text-slate-700 transition-colors"
+                          className="text-slate-400 hover:text-slate-700 transition-colors p-0.5"
                         >
                           {copiedId === permit.permitNumber ? (
-                            <Check className="w-3.5 h-3.5 text-emerald-600" />
+                            <Check className="w-3 h-3 text-emerald-600 stroke-[3]" />
                           ) : (
                             <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                           )}
                         </button>
                       </div>
 
-                      <div className="font-bold text-slate-900 text-sm line-clamp-1 group-hover:text-amber-800 transition-colors" title={titleText}>
+                      <div className="font-bold text-slate-900 text-xs sm:text-sm line-clamp-1 group-hover:text-amber-800 transition-colors" title={titleText}>
                         {titleText}
                       </div>
 
-                      <div className="text-[11px] text-slate-500 flex items-center gap-1.5 flex-wrap">
+                      <div className="text-[11px] text-slate-500 flex items-center gap-1 truncate">
                         <span className="text-slate-400">Target:</span>
-                        <span className="font-medium text-slate-700 truncate max-w-[180px]">
+                        <span className="font-medium text-slate-700 truncate">
                           {permit.equipment.name}
                         </span>
                         {equipmentTag && (
-                          <span className="font-mono text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200">
+                          <span className="font-mono text-[9px] px-1 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200 shrink-0">
                             {equipmentTag}
                           </span>
                         )}
@@ -279,41 +204,41 @@ export const PermitTable: React.FC<PermitTableProps> = ({ permits, loading }) =>
                   </td>
 
                   {/* Column 2: Safety Type */}
-                  <td className="py-4 px-3 align-top whitespace-nowrap">
-                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-xs font-bold border ${typeBadge.style}`}>
+                  <td className="py-3.5 px-3 align-top whitespace-nowrap">
+                    <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg text-xs font-bold border ${typeBadge.style}`}>
                       <TypeIcon className="w-3.5 h-3.5 shrink-0" />
                       <span>{typeBadge.label}</span>
                     </span>
                   </td>
 
                   {/* Column 3: Plant & Area */}
-                  <td className="py-4 px-3 align-top">
-                    <div className="font-bold text-slate-800 text-xs leading-snug">
+                  <td className="py-3.5 px-3 align-top">
+                    <div className="font-bold text-slate-800 text-xs leading-snug truncate">
                       {permit.area.name}
                     </div>
-                    <div className="text-[11px] text-slate-400 font-normal leading-snug mt-0.5">
+                    <div className="text-[11px] text-slate-400 font-normal leading-snug truncate mt-0.5">
                       {permit.plant.name}
                     </div>
                   </td>
 
                   {/* Column 4: Status */}
-                  <td className="py-4 px-3 align-top whitespace-nowrap">
-                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-xs border ${statusBadge.style}`}>
+                  <td className="py-3.5 px-3 align-top whitespace-nowrap">
+                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-xs border ${statusBadge.style}`}>
                       <span className={`w-1.5 h-1.5 rounded-full ${statusBadge.dot}`} />
                       <span>{statusBadge.label}</span>
                     </span>
                   </td>
 
                   {/* Column 5: Validity / Countdown */}
-                  <td className="py-4 px-3 align-top whitespace-nowrap">
+                  <td className="py-3.5 px-3 align-top whitespace-nowrap">
                     <CountdownTimer plannedEnd={plannedEnd} status={permit.status} />
                   </td>
 
                   {/* Column 6: Approvals */}
-                  <td className="py-4 px-3 align-top text-center whitespace-nowrap">
+                  <td className="py-3.5 px-2 align-top text-center whitespace-nowrap">
                     {totalRequired > 0 ? (
-                      <div className="inline-flex flex-col items-center gap-1">
-                        <span className={`text-xs font-extrabold ${approvedCount === totalRequired ? 'text-emerald-700' : 'text-slate-700'}`}>
+                      <div className="inline-flex flex-col items-center gap-0.5">
+                        <span className={`text-xs font-black ${approvedCount === totalRequired ? 'text-emerald-700' : 'text-slate-700'}`}>
                           {approvedCount}/{totalRequired}
                         </span>
                         <div className="flex items-center gap-1">
@@ -321,7 +246,7 @@ export const PermitTable: React.FC<PermitTableProps> = ({ permits, loading }) =>
                             <span
                               key={app.id}
                               title={`${(app.roleRequired || app.role || '').replace('_', ' ')}: ${app.status}`}
-                              className={`w-2 h-2 rounded-full ${
+                              className={`w-1.5 h-1.5 rounded-full ${
                                 app.status === 'APPROVED'
                                   ? 'bg-emerald-500'
                                   : app.status === 'REJECTED'
@@ -337,12 +262,12 @@ export const PermitTable: React.FC<PermitTableProps> = ({ permits, loading }) =>
                     )}
                   </td>
 
-                  {/* Column 7: Action */}
-                  <td className="py-4 px-5 align-top text-right whitespace-nowrap">
+                  {/* Column 7: Action (STICKY RIGHT - Guaranteed 100% visible at all times!) */}
+                  <td className="py-3.5 pr-4 pl-3 align-top text-right whitespace-nowrap sticky right-0 bg-white group-hover:bg-slate-50 transition-colors shadow-[-8px_0_12px_-4px_rgba(0,0,0,0.06)] z-10">
                     <Link
                       href={`/permits/${permit.id}`}
                       onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-900 hover:text-white transition-all shadow-2xs group-hover:bg-amber-500 group-hover:text-slate-950"
+                      className="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-950 bg-amber-500 hover:bg-amber-400 active:scale-95 transition-all shadow-xs"
                     >
                       <span>Review</span>
                       <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
