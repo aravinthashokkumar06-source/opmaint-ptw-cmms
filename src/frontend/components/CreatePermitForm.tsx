@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useAuth } from '../context/AuthContext';
 import { ConflictBanner, ConflictingPermit } from './ConflictBanner';
 import { TypeSpecificFields } from './TypeSpecificFields';
+<<<<<<< HEAD
 import {
   Flame,
   Box,
@@ -18,6 +19,20 @@ import {
   ChevronLeft,
   CheckCircle2,
   Save,
+=======
+import { 
+  Flame, 
+  Box, 
+  ArrowUpRight, 
+  Zap, 
+  FlaskConical, 
+  Snowflake, 
+  ShieldAlert, 
+  ChevronRight, 
+  ChevronLeft, 
+  CheckCircle2, 
+  Save, 
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
   Send,
   Building2,
   HardHat,
@@ -281,56 +296,104 @@ export const CreatePermitForm: React.FC = () => {
   };
 
   const permitTypes = [
+<<<<<<< HEAD
     {
       id: 'HOT_WORK',
       label: 'Hot Work',
       desc: 'Welding, torch cutting, sparks & open flames',
       icon: Flame,
+=======
+    { 
+      id: 'HOT_WORK', 
+      label: 'Hot Work', 
+      desc: 'Welding, torch cutting, sparks & open flames', 
+      icon: Flame, 
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
       accentColor: 'orange',
       bgSelected: 'bg-orange-50/90 border-orange-500 text-orange-950 ring-2 ring-orange-500/20',
       badgeColor: 'bg-orange-600 text-white'
     },
+<<<<<<< HEAD
     {
       id: 'CONFINED_SPACE',
       label: 'Confined Space',
       desc: 'Tanks, boilers, pits & low-oxygen vessels',
       icon: Box,
+=======
+    { 
+      id: 'CONFINED_SPACE', 
+      label: 'Confined Space', 
+      desc: 'Tanks, boilers, pits & low-oxygen vessels', 
+      icon: Box, 
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
       accentColor: 'purple',
       bgSelected: 'bg-purple-50/90 border-purple-500 text-purple-950 ring-2 ring-purple-500/20',
       badgeColor: 'bg-purple-600 text-white'
     },
+<<<<<<< HEAD
     {
       id: 'WORKING_AT_HEIGHT',
       label: 'Height Work',
       desc: 'Work > 2m, scaffolding, ladders & boom lifts',
       icon: ArrowUpRight,
+=======
+    { 
+      id: 'WORKING_AT_HEIGHT', 
+      label: 'Height Work', 
+      desc: 'Work > 2m, scaffolding, ladders & boom lifts', 
+      icon: ArrowUpRight, 
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
       accentColor: 'sky',
       bgSelected: 'bg-sky-50/90 border-sky-500 text-sky-950 ring-2 ring-sky-500/20',
       badgeColor: 'bg-sky-600 text-white'
     },
+<<<<<<< HEAD
     {
       id: 'ELECTRICAL_LOTO',
       label: 'Electrical LOTO',
       desc: 'Isolation, padlocks, 415V/11kV de-energization',
       icon: Zap,
+=======
+    { 
+      id: 'ELECTRICAL_LOTO', 
+      label: 'Electrical LOTO', 
+      desc: 'Isolation, padlocks, 415V/11kV de-energization', 
+      icon: Zap, 
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
       accentColor: 'amber',
       bgSelected: 'bg-amber-50/90 border-amber-500 text-amber-950 ring-2 ring-amber-500/20',
       badgeColor: 'bg-amber-600 text-slate-950'
     },
+<<<<<<< HEAD
     {
       id: 'CHEMICAL_HANDLING',
       label: 'Chemical Handling',
       desc: 'Acid, caustic, toxic, corrosive chemicals',
       icon: FlaskConical,
+=======
+    { 
+      id: 'CHEMICAL_HANDLING', 
+      label: 'Chemical Handling', 
+      desc: 'Acid, caustic, toxic, corrosive chemicals', 
+      icon: FlaskConical, 
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
       accentColor: 'emerald',
       bgSelected: 'bg-emerald-50/90 border-emerald-500 text-emerald-950 ring-2 ring-emerald-500/20',
       badgeColor: 'bg-emerald-600 text-white'
     },
+<<<<<<< HEAD
     {
       id: 'COLD_WORK',
       label: 'Cold Work',
       desc: 'General maintenance without spark or heat',
       icon: Snowflake,
+=======
+    { 
+      id: 'COLD_WORK', 
+      label: 'Cold Work', 
+      desc: 'General maintenance without spark or heat', 
+      icon: Snowflake, 
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
       accentColor: 'cyan',
       bgSelected: 'bg-cyan-50/90 border-cyan-500 text-cyan-950 ring-2 ring-cyan-500/20',
       badgeColor: 'bg-cyan-600 text-white'
@@ -390,6 +453,7 @@ export const CreatePermitForm: React.FC = () => {
               key={s.step}
               type="button"
               onClick={() => setCurrentStep(s.step)}
+<<<<<<< HEAD
               className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${currentStep === s.step
                 ? 'bg-slate-900 text-white shadow-xs'
                 : currentStep > s.step
@@ -403,6 +467,23 @@ export const CreatePermitForm: React.FC = () => {
                   ? 'bg-emerald-600 text-white'
                   : 'bg-slate-200 text-slate-600'
                 }`}>
+=======
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                currentStep === s.step
+                  ? 'bg-slate-900 text-white shadow-xs'
+                  : currentStep > s.step
+                  ? 'text-emerald-700 bg-emerald-50 hover:bg-emerald-100'
+                  : 'text-slate-400 hover:text-slate-700'
+              }`}
+            >
+              <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black ${
+                currentStep === s.step
+                  ? 'bg-amber-400 text-slate-950'
+                  : currentStep > s.step
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-slate-200 text-slate-600'
+              }`}>
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
                 {currentStep > s.step ? <Check className="w-3 h-3 stroke-[3]" /> : s.step}
               </span>
               <span className="hidden md:inline">{s.label}</span>
@@ -442,6 +523,7 @@ export const CreatePermitForm: React.FC = () => {
                         onClick={() => setType(pt.id)}
                         role="button"
                         tabIndex={0}
+<<<<<<< HEAD
                         className={`cursor-pointer p-4 rounded-2xl border-2 transition-all select-none relative group ${isSelected
                           ? pt.bgSelected + ' shadow-md scale-[1.01]'
                           : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/60 text-slate-700'
@@ -450,6 +532,18 @@ export const CreatePermitForm: React.FC = () => {
                         <div className="flex items-center justify-between mb-2">
                           <div className={`p-2 rounded-xl ${isSelected ? pt.badgeColor : 'bg-slate-100 text-slate-700 group-hover:bg-slate-200'
                             }`}>
+=======
+                        className={`cursor-pointer p-4 rounded-2xl border-2 transition-all select-none relative group ${
+                          isSelected
+                            ? pt.bgSelected + ' shadow-md scale-[1.01]'
+                            : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/60 text-slate-700'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <div className={`p-2 rounded-xl ${
+                            isSelected ? pt.badgeColor : 'bg-slate-100 text-slate-700 group-hover:bg-slate-200'
+                          }`}>
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
                             <Icon className="w-4 h-4" />
                           </div>
                           {isSelected && (
@@ -636,10 +730,18 @@ export const CreatePermitForm: React.FC = () => {
                         key={hazard}
                         type="button"
                         onClick={() => toggleHazard(hazard)}
+<<<<<<< HEAD
                         className={`text-left flex items-center justify-between p-3 rounded-xl border-2 text-xs font-bold transition-all ${isChecked
                           ? 'bg-amber-500/10 border-amber-500 text-amber-950 shadow-2xs'
                           : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                           }`}
+=======
+                        className={`text-left flex items-center justify-between p-3 rounded-xl border-2 text-xs font-bold transition-all ${
+                          isChecked
+                            ? 'bg-amber-500/10 border-amber-500 text-amber-950 shadow-2xs'
+                            : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                        }`}
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
                       >
                         <span>{hazard}</span>
                         {isChecked ? (
@@ -684,10 +786,18 @@ export const CreatePermitForm: React.FC = () => {
                         key={item}
                         type="button"
                         onClick={() => togglePpe(item)}
+<<<<<<< HEAD
                         className={`text-left flex items-center justify-between p-3 rounded-xl border-2 text-xs font-bold transition-all ${isChecked
                           ? 'bg-emerald-500/10 border-emerald-500 text-emerald-950 shadow-2xs'
                           : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                           }`}
+=======
+                        className={`text-left flex items-center justify-between p-3 rounded-xl border-2 text-xs font-bold transition-all ${
+                          isChecked
+                            ? 'bg-emerald-500/10 border-emerald-500 text-emerald-950 shadow-2xs'
+                            : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                        }`}
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
                       >
                         <span>{item}</span>
                         {isChecked ? (
@@ -715,8 +825,14 @@ export const CreatePermitForm: React.FC = () => {
                       tabIndex={0}
                       className="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-800 cursor-pointer select-none hover:bg-amber-50/50 transition-colors"
                     >
+<<<<<<< HEAD
                       <div className={`w-4 h-4 rounded flex items-center justify-center ${p.checked ? 'bg-amber-500 text-slate-950' : 'border border-slate-300'
                         }`}>
+=======
+                      <div className={`w-4 h-4 rounded flex items-center justify-center ${
+                        p.checked ? 'bg-amber-500 text-slate-950' : 'border border-slate-300'
+                      }`}>
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
                         {p.checked && <Check className="w-3 h-3 stroke-[3]" />}
                       </div>
                       <span>{p.item}</span>
@@ -884,7 +1000,11 @@ export const CreatePermitForm: React.FC = () => {
 
               {/* Progress bar */}
               <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+<<<<<<< HEAD
                 <div
+=======
+                <div 
+>>>>>>> 383b52d1b65dd31ea75017683f75266667281945
                   className="bg-amber-500 h-full rounded-full transition-all duration-300"
                   style={{ width: `${completeness}%` }}
                 />
